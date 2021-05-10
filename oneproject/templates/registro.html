@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block content %}
+    <h1 class="text-center">Cadastre seu produto</h1>
+    <br>
+    <form enctype="multipart/form-data" action="submit", method="POST">{% csrf_token %}
+        <div class="container">
+            <input type="number" class="form-control" name="produto_id" value="{{ produto.id }}" hidden>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" name="email" value="{{ produto.email }}">
+            </div>
+            <div class="form-group">
+                <label>Telefone:</label>
+                <input type="tel" class="form-control" name="celular" value="{{ produto.celular }}">
+            </div>
+            <div class="form-group">
+                <label>Cidade:</label>
+                <input type="text" class="form-control" name="cidade" value="{{ produto.cidade }}">
+            </div>
+            <div class="form-group">
+                <label>Descrição:</label>
+                <textarea class="form-control" rows="5" name="descricao">{{ produto.descricao }}</textarea>
+            </div>
+            <div class="form-group">
+                <a href="/media/{{ produto.photo }}" target="_blank">Foto atual</a>
+                <input type="file" class="form-control-file border" name="file" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary">
+                {% if produto %}
+                    Alterar
+                {% else %}
+                    Cadastrar
+                {% endif %}
+            </button>
+        </div>
+      </form>
+      <br>
+
+
+{% endblock %}
